@@ -4,8 +4,6 @@ summary: An offline-first point of sale app for restaurants that sell at events.
 kind: Mobile · Offline-first POS
 stack: [Flutter, Dart, Drift, SQLite, Riverpod, ESC/POS, Google Drive API]
 order: 2
-repos:
-  - { label: Source, url: "https://github.com/gludescher/possum" }
 images:
   - { src: "/projects/possum/checkout.png", alt: "Possum checkout screen with an order in progress" }
   - { src: "/projects/possum/item-options.png", alt: "Options dialog for a burger" }

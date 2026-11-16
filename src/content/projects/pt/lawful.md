@@ -4,9 +4,6 @@ summary: Software web multi-tenant para gestão de escritórios de advocacia, se
 kind: Full-stack · SaaS multi-tenant
 stack: [Ruby on Rails, PostgreSQL, React, TypeScript, Mantine, TanStack Query, Docker, RSpec]
 order: 1
-repos:
-  - { label: API (Rails), url: "https://github.com/gludescher/lawful-api" }
-  - { label: Web (React), url: "https://github.com/gludescher/lawful-web" }
 ---
 
 ## O problema

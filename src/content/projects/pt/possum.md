@@ -4,8 +4,6 @@ summary: Um app de ponto de venda offline-first para restaurantes que vendem em 
 kind: Mobile · PDV offline-first
 stack: [Flutter, Dart, Drift, SQLite, Riverpod, ESC/POS, Google Drive API]
 order: 2
-repos:
-  - { label: Código-fonte, url: "https://github.com/gludescher/possum" }
 images:
   - { src: "/projects/possum/checkout.png", alt: "Tela de venda do Possum com um pedido em andamento" }
   - { src: "/projects/possum/item-options.png", alt: "Diálogo de opções de um hambúrguer" }
