@@ -1,0 +1,13 @@
+---
+// Renders the default slot (rendered markdown) and inserts the "insert" slot
+// right before its second <h2>, i.e. after the first section. If there is no
+// second section, the insert goes at the end.
+const html = await Astro.slots.render("default");
+const first = html.indexOf("<h2");
+const second = first === -1 ? -1 : html.indexOf("<h2", first + 1);
+const split = second === -1 ? html.length : second;
+---
+
+<Fragment set:html={html.slice(0, split)} />
+<slot name="insert" />
+<Fragment set:html={html.slice(split)} />

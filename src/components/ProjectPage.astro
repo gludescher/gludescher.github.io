@@ -2,6 +2,8 @@
 import { render, type CollectionEntry } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Nav from "./Nav.astro";
+import AfterFirstSection from "./AfterFirstSection.astro";
+import Gallery from "./Gallery.astro";
 import { site } from "../data/site";
 import { getLocale, localePath, useTranslations } from "../i18n";
 
@@ -34,34 +36,12 @@ const { title, summary, kind, stack, repos, live, images } = project.data;
       {live && <a class="text-accent-2 hover:underline" href={live}>{t("projects.live")} ↗</a>}
     </div>
 
-    {
-      images.length > 0 && (
-        <div class="mt-12 grid gap-4 sm:grid-cols-2">
-          {images.map((img, i) => {
-            // First image is full width; so is the last one if it would sit alone in its row.
-            const wide = i === 0 || (i === images.length - 1 && (images.length - 1) % 2 === 1);
-            return (
-              <a
-                href={img.src}
-                target="_blank"
-                rel="noopener"
-                class={`group overflow-hidden rounded-xl border border-border transition hover:border-accent ${wide ? "sm:col-span-2" : ""}`}
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  loading={i < 2 ? "eager" : "lazy"}
-                  class="w-full transition duration-500 group-hover:scale-[1.02]"
-                />
-              </a>
-            );
-          })}
-        </div>
-      )
-    }
-
     <article class="prose-case mt-12">
-      <Content />
+      {/* Screenshots go right after the first section ("The problem"). */}
+      <AfterFirstSection>
+        <Content />
+        {images.length > 0 && <Gallery slot="insert" images={images} />}
+      </AfterFirstSection>
     </article>
   </main>
 </Layout>
