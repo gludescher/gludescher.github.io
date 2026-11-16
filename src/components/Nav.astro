@@ -1,0 +1,58 @@
+---
+import { site } from "../data/site";
+import { alternatePath, getLocale, localePath, useTranslations } from "../i18n";
+
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+const home = localePath(locale, "/");
+const alt = alternatePath(Astro.url);
+---
+
+<header class="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-bg/70 backdrop-blur-md">
+  <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+    <a href={home} class="font-display font-semibold tracking-tight">{site.name}</a>
+    <div class="flex items-center gap-6 text-sm text-muted">
+      <a class="hidden transition hover:text-fg sm:inline" href={`${home}#projects`}>{t("nav.projects")}</a>
+      <a class="hidden transition hover:text-fg sm:inline" href={`${home}#experience`}>{t("nav.experience")}</a>
+      <a class="hidden transition hover:text-fg sm:inline" href={`${home}#about`}>{t("nav.about")}</a>
+      <a class="transition hover:text-fg" href={`${home}#contact`}>{t("nav.contact")}</a>
+      <div class="flex items-center gap-2">
+        <a
+          id="lang-switch"
+          href={alt.href}
+          hreflang={alt.locale === "pt" ? "pt-BR" : "en"}
+          aria-label={t("nav.language")}
+          title={t("nav.language")}
+          class="rounded-full border border-border px-2.5 py-1 font-mono text-xs transition hover:border-accent hover:text-fg"
+        >
+          {alt.locale.toUpperCase()}
+        </a>
+        <button
+          id="theme-toggle"
+          type="button"
+          aria-label={t("nav.theme")}
+          title={t("nav.theme")}
+          class="rounded-full border border-border px-2.5 py-1 transition hover:border-accent hover:text-fg"
+        >
+          ◐
+        </button>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  document.getElementById("theme-toggle")?.addEventListener("click", () => {
+    const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem("theme", next);
+    } catch {}
+  });
+
+  // Keep the reader on the same section when switching language.
+  document.getElementById("lang-switch")?.addEventListener("click", (e) => {
+    const a = e.currentTarget as HTMLAnchorElement;
+    if (location.hash) a.href = a.href.split("#")[0] + location.hash;
+  });
+</script>

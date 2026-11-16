@@ -1,0 +1,67 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import Nav from "./Nav.astro";
+import { site } from "../data/site";
+import { getLocale, localePath, useTranslations } from "../i18n";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const locale = getLocale(Astro.url);
+const t = useTranslations(locale);
+const { Content } = await render(project);
+const { title, summary, kind, stack, repos, live, images } = project.data;
+---
+
+<Layout title={`${title} · ${site.name}`} description={summary}>
+  <Nav />
+  <main class="mx-auto max-w-3xl px-6 pt-32 pb-24">
+    <a href={`${localePath(locale, "/")}#projects`} class="text-sm text-muted transition hover:text-fg">
+      {t("projects.back")}
+    </a>
+    <p class="mt-8 font-mono text-xs tracking-widest text-accent-2 uppercase">{kind}</p>
+    <h1 class="mt-3 font-display text-5xl font-bold tracking-tight sm:text-6xl">{title}</h1>
+    <p class="mt-5 text-xl text-muted">{summary}</p>
+
+    <ul class="mt-6 flex flex-wrap gap-2">
+      {stack.map((s) => <li class="rounded-full border border-border px-3 py-1 font-mono text-xs text-muted">{s}</li>)}
+    </ul>
+    <div class="mt-6 flex flex-wrap gap-5 text-sm">
+      {repos.map((r) => <a class="text-accent-2 hover:underline" href={r.url}>{r.label} ↗</a>)}
+      {live && <a class="text-accent-2 hover:underline" href={live}>{t("projects.live")} ↗</a>}
+    </div>
+
+    {
+      images.length > 0 && (
+        <div class="mt-12 grid gap-4 sm:grid-cols-2">
+          {images.map((img, i) => {
+            // First image is full width; so is the last one if it would sit alone in its row.
+            const wide = i === 0 || (i === images.length - 1 && (images.length - 1) % 2 === 1);
+            return (
+              <a
+                href={img.src}
+                target="_blank"
+                rel="noopener"
+                class={`group overflow-hidden rounded-xl border border-border transition hover:border-accent ${wide ? "sm:col-span-2" : ""}`}
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  loading={i < 2 ? "eager" : "lazy"}
+                  class="w-full transition duration-500 group-hover:scale-[1.02]"
+                />
+              </a>
+            );
+          })}
+        </div>
+      )
+    }
+
+    <article class="prose-case mt-12">
+      <Content />
+    </article>
+  </main>
+</Layout>

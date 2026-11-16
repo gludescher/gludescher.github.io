@@ -1,0 +1,47 @@
+---
+import "../styles/global.css";
+import { site, profile } from "../data/site";
+import { alternatePath, getLocale, htmlLang, ogLocale } from "../i18n";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const locale = getLocale(Astro.url);
+const p = profile[locale];
+const { title = `${site.name} · ${p.title}`, description = p.description } = Astro.props;
+const alt = alternatePath(Astro.url);
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const altUrl = new URL(alt.href, Astro.site);
+---
+
+<!doctype html>
+<html lang={htmlLang[locale]} data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={htmlLang[locale]} href={canonical} />
+    <link rel="alternate" hreflang={htmlLang[alt.locale]} href={altUrl} />
+    <link rel="alternate" hreflang="x-default" href={locale === "en" ? canonical : altUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={ogLocale[locale]} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      // Apply saved theme before paint to avoid a flash.
+      try {
+        const t = localStorage.getItem("theme");
+        if (t) document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body class="min-h-screen antialiased">
+    <slot />
+  </body>
+</html>
