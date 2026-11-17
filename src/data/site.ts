@@ -131,7 +131,7 @@ export const profile: Record<Locale, Profile> = {
     about: [
       "Sou engenheiro de software, gosto de trabalhar em equipe e de entender o negócio antes de escrever código. Meu foco é backend, mas passei a maior parte da carreira como full-stack, sendo dono de funcionalidades do banco de dados à interface.",
       "Até recentemente estive no Nubank, no time de contas PJ, trabalhando com microsserviços em Clojure, Datomic e Kafka, além de mobile e web. Antes disso, liderei planejamentos técnicos e decisões de produto em uma empresa de software para clínicas odontológicas, e comecei a carreira em HR tech.",
-      "Me formei em Engenharia de Computação na Escola Politécnica da USP e fiz uma pós-graduação em Liderança e Gestão em Tecnologia.",
+      "Sou formado em Engenharia de Computação na Escola Politécnica da USP e fiz uma pós-graduação em Liderança e Gestão em Tecnologia.",
     ],
     skills: [
       { group: "Backend", items: ["Clojure", "Ruby on Rails", "Python", "C#", "GraphQL", "Kafka", "Datomic"] },
