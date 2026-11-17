@@ -7,11 +7,10 @@ interface Props {
   summary: string;
   stack: string[];
   href: string;
-  index: number;
   cta: string;
 }
 
-export default function ProjectCard({ title, kind, summary, stack, href, index, cta }: Props) {
+export default function ProjectCard({ title, kind, summary, stack, href, cta }: Props) {
   // Track the cursor so the spotlight gradient follows it.
   const onMove = (e: MouseEvent<HTMLElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -23,12 +22,8 @@ export default function ProjectCard({ title, kind, summary, stack, href, index, 
     <motion.a
       href={href}
       onMouseMove={onMove}
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -4 }}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface p-7"
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface p-7"
     >
       <div className="spotlight pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="relative flex h-full flex-col">

@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from "motion/react";
+import type { CSSProperties } from "react";
 
 interface Props {
   name: string;
@@ -9,15 +10,8 @@ interface Props {
   labels: { greeting: string; viewProjects: string; getInTouch: string; portraitAlt: string; downloadCv: string };
 }
 
-const ease = [0.22, 1, 0.36, 1] as const;
-
 export default function Hero({ name, title, tagline, photo, cvHref, labels }: Props) {
   const reduce = useReducedMotion();
-  const item = (i: number) => ({
-    initial: reduce ? false : { opacity: 0, y: 24 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.7, delay: 0.1 + i * 0.12, ease },
-  });
   const initials = name
     .split(" ")
     .map((w) => w[0])
@@ -42,19 +36,19 @@ export default function Hero({ name, title, tagline, photo, cvHref, labels }: Pr
 
       <div className="relative mx-auto grid w-full max-w-5xl items-center gap-12 md:grid-cols-[1fr_auto]">
         <div className="order-2 md:order-1">
-          <motion.p {...item(0)} className="mb-4 font-mono text-sm tracking-widest text-accent-2 uppercase">
+          <p style={{ "--i": 0 } as CSSProperties} className="hero-in mb-4 font-mono text-sm tracking-widest text-accent-2 uppercase">
             {title}
-          </motion.p>
-          <motion.h1
-            {...item(1)}
-            className="font-display text-5xl leading-[1.05] font-bold tracking-tight sm:text-6xl lg:text-7xl"
+          </p>
+          <h1
+            style={{ "--i": 1 } as CSSProperties}
+            className="hero-in font-display text-5xl leading-[1.05] font-bold tracking-tight sm:text-6xl lg:text-7xl"
           >
             {labels.greeting} <span className="text-accent">{name.split(" ")[0]}</span>.
-          </motion.h1>
-          <motion.p {...item(2)} className="mt-6 max-w-xl text-lg text-muted sm:text-xl">
+          </h1>
+          <p style={{ "--i": 2 } as CSSProperties} className="hero-in mt-6 max-w-xl text-lg text-muted sm:text-xl">
             {tagline}
-          </motion.p>
-          <motion.div {...item(3)} className="mt-10 flex flex-wrap gap-4">
+          </p>
+          <div style={{ "--i": 3 } as CSSProperties} className="hero-in mt-10 flex flex-wrap gap-4">
             <a
               href="#projects"
               className="rounded-full bg-fg px-6 py-3 text-sm font-medium text-bg transition hover:scale-105"
@@ -75,16 +69,11 @@ export default function Hero({ name, title, tagline, photo, cvHref, labels }: Pr
             >
               {labels.downloadCv}
             </a>
-          </motion.div>
+          </div>
         </div>
 
         {/* Portrait with a slowly rotating gradient ring */}
-        <motion.div
-          initial={reduce ? false : { opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.2, ease }}
-          className="relative order-1 h-40 w-40 sm:h-52 sm:w-52 md:order-2 md:h-72 md:w-72"
-        >
+        <div className="hero-portrait relative order-1 h-40 w-40 sm:h-52 sm:w-52 md:order-2 md:h-72 md:w-72">
           <motion.div
             aria-hidden
             className="absolute -inset-1 rounded-full"
@@ -101,7 +90,7 @@ export default function Hero({ name, title, tagline, photo, cvHref, labels }: Pr
               </div>
             )}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

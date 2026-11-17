@@ -6,19 +6,36 @@ const locale = getLocale(Astro.url);
 const t = useTranslations(locale);
 const home = localePath(locale, "/");
 const alt = alternatePath(Astro.url);
+const links = [
+  { id: "projects", label: t("nav.projects") },
+  { id: "experience", label: t("nav.experience") },
+  { id: "about", label: t("nav.about") },
+  { id: "contact", label: t("nav.contact") },
+];
+const pill =
+  "inline-flex h-8 w-11 items-center justify-center rounded-full border border-border transition hover:border-accent hover:text-fg";
 ---
 
-<header class="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-bg/70 backdrop-blur-md">
-  <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <a id="home-link" href={home} class="flex items-center gap-2.5 font-display font-semibold tracking-tight">
+<header class="fixed inset-x-0 top-0 z-50 transform-gpu border-b border-border/60 bg-bg/70 backdrop-blur-md">
+  <nav class="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
+    <a
+      id="home-link"
+      href={home}
+      class="flex shrink-0 items-center gap-2.5 font-display text-sm font-semibold tracking-tight whitespace-nowrap sm:text-base"
+    >
       <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
       {site.name}
     </a>
     <div class="flex items-center gap-6 text-sm text-muted">
-      <a class="hidden transition hover:text-fg sm:inline" data-section="projects" href={`${home}#projects`}>{t("nav.projects")}</a>
-      <a class="hidden transition hover:text-fg sm:inline" data-section="experience" href={`${home}#experience`}>{t("nav.experience")}</a>
-      <a class="hidden transition hover:text-fg sm:inline" data-section="about" href={`${home}#about`}>{t("nav.about")}</a>
-      <a class="transition hover:text-fg" data-section="contact" href={`${home}#contact`}>{t("nav.contact")}</a>
+      <div class="hidden items-center gap-6 sm:flex">
+        {
+          links.map((l) => (
+            <a class="transition hover:text-fg" data-section={l.id} href={`${home}#${l.id}`}>
+              {l.label}
+            </a>
+          ))
+        }
+      </div>
       <div class="flex items-center gap-2">
         <a
           id="lang-switch"
@@ -26,7 +43,7 @@ const alt = alternatePath(Astro.url);
           hreflang={alt.locale === "pt" ? "pt-BR" : "en"}
           aria-label={t("nav.language")}
           title={t("nav.language")}
-          class="inline-flex h-8 w-11 items-center justify-center rounded-full border border-border font-mono text-xs leading-none pt-[3px] transition hover:border-accent hover:text-fg"
+          class={`${pill} pt-[3px] font-mono text-xs leading-none`}
         >
           {alt.locale.toUpperCase()}
         </a>
@@ -35,16 +52,50 @@ const alt = alternatePath(Astro.url);
           type="button"
           aria-label={t("nav.theme")}
           title={t("nav.theme")}
-          class="inline-flex h-8 w-11 items-center justify-center rounded-full border border-border text-sm leading-none transition hover:border-accent hover:text-fg"
+          class={`${pill} text-sm leading-none`}
         >
           <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <circle cx="12" cy="12" r="9" />
-            <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none" />
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"></path>
+          </svg>
+        </button>
+        <button
+          id="menu-toggle"
+          type="button"
+          aria-label={t("nav.menu")}
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          class={`${pill} sm:hidden`}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            class="size-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <path id="menu-icon-open" d="M4 7h16M4 12h16M4 17h16"></path>
+            <path id="menu-icon-close" d="M6 6l12 12M18 6L6 18" class="hidden"></path>
           </svg>
         </button>
       </div>
     </div>
   </nav>
+  <div id="mobile-menu" hidden class="border-t border-border/60 sm:hidden">
+    <ul class="mx-auto max-w-5xl px-4 py-2">
+      {
+        links.map((l) => (
+          <li>
+            <a class="block rounded-lg px-2 py-3 text-base text-muted transition hover:text-fg" data-section={l.id} href={`${home}#${l.id}`}>
+              {l.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </header>
 
 <script>
@@ -57,10 +108,12 @@ const alt = alternatePath(Astro.url);
     history.replaceState(null, "", location.pathname + location.search);
   });
 
-  // Highlight the nav link of the section currently on screen (home page only).
-  const navLinks = new Map(
-    [...document.querySelectorAll<HTMLAnchorElement>("a[data-section]")].map((a) => [a.dataset.section!, a]),
-  );
+  // Highlight the nav links of the section currently on screen (home page only).
+  const navLinks = new Map<string, HTMLAnchorElement[]>();
+  document.querySelectorAll<HTMLAnchorElement>("a[data-section]").forEach((a) => {
+    const id = a.dataset.section!;
+    navLinks.set(id, [...(navLinks.get(id) ?? []), a]);
+  });
   const sections = [...navLinks.keys()]
     .map((id) => document.getElementById(id))
     .filter((el): el is HTMLElement => el !== null);
@@ -72,16 +125,43 @@ const alt = alternatePath(Astro.url);
         const line = window.innerHeight * 0.4;
         for (const s of sections) if (s.getBoundingClientRect().top <= line) current = s.id;
       }
-      navLinks.forEach((a, id) => {
-        const on = id === current;
-        a.classList.toggle("text-accent", on);
-        on ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current");
+      navLinks.forEach((anchors, id) => {
+        for (const a of anchors) {
+          a.classList.toggle("text-accent", id === current);
+          if (id === current) a.setAttribute("aria-current", "true");
+          else a.removeAttribute("aria-current");
+        }
       });
     };
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update);
+    window.addEventListener("pageshow", update);
     update();
   }
+
+  // Mobile menu.
+  const menu = document.getElementById("mobile-menu");
+  const toggle = document.getElementById("menu-toggle");
+  const setMenu = (open: boolean) => {
+    if (!menu || !toggle) return;
+    menu.hidden = !open;
+    toggle.setAttribute("aria-expanded", String(open));
+    document.getElementById("menu-icon-open")?.classList.toggle("hidden", open);
+    document.getElementById("menu-icon-close")?.classList.toggle("hidden", !open);
+  };
+  toggle?.addEventListener("click", () => setMenu(menu?.hidden === true));
+  menu?.addEventListener("click", (e) => {
+    if ((e.target as HTMLElement).closest("a")) setMenu(false);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setMenu(false);
+  });
+  document.addEventListener("click", (e) => {
+    if (!(e.target as HTMLElement).closest("header")) setMenu(false);
+  });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 640) setMenu(false);
+  });
 
   document.getElementById("theme-toggle")?.addEventListener("click", () => {
     const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";

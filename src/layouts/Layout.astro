@@ -18,7 +18,7 @@ const ogImage = new URL("/og.jpg", Astro.site);
 ---
 
 <!doctype html>
-<html lang={htmlLang[locale]} data-theme="dark">
+<html lang={htmlLang[locale]} data-theme="dark" class="no-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -50,5 +50,10 @@ const ogImage = new URL("/og.jpg", Astro.site);
   </head>
   <body class="min-h-screen antialiased">
     <slot />
+    <script is:inline>
+      window.addEventListener("load", () => {
+        setTimeout(() => document.documentElement.classList.remove("no-smooth"), 150);
+      });
+    </script>
   </body>
 </html>
