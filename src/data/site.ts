@@ -3,9 +3,9 @@ import type { Locale } from "../i18n";
 // Details shared by every language.
 export const site = {
   name: "Guilherme Ludescher",
-  // Put the photo in /public (e.g. public/me.jpg) and set this to "/me.jpg".
-  // While null, the hero shows an initials placeholder.
-  photo: null as string | null,
+  // Photo lives in /public. Set to null to show an initials placeholder instead.
+  photo: "/me.jpg" as string | null,
+  cv: { en: "/cv/Guilherme-Ludescher-CV-EN.pdf", pt: "/cv/Guilherme-Ludescher-CV-PT.pdf" } as Record<Locale, string>,
   // Update once the repo/domain is decided (also in astro.config.mjs).
   url: "https://gludescher.github.io",
   links: {
@@ -39,13 +39,13 @@ export const profile: Record<Locale, Profile> = {
   en: {
     title: "Backend Software Engineer",
     tagline:
-      "Backend-focused engineer with a full-stack streak. Currently building business banking at Nubank, with 6+ years shipping production systems in Clojure and Ruby on Rails.",
+      "Backend-focused engineer with a full-stack streak. 6+ years shipping production systems in Clojure and Ruby on Rails, most recently building business banking at Nubank. Now building Lawful and Possum, and open to new opportunities.",
     description:
       "Portfolio of Guilherme Ludescher, backend software engineer (Clojure, Ruby on Rails, Kafka, PostgreSQL) based in São Paulo, Brazil.",
     location: "São Paulo, Brazil, and open to relocation",
     about: [
       "I'm a software engineer who enjoys working in a team and understanding the business before writing code. My focus is backend, but I've spent most of my career full-stack, owning features from the database to the interface.",
-      "I'm currently at Nubank on the business accounts team, working on microservices in Clojure with Datomic and Kafka, plus mobile and web. Before that I led technical planning and product decisions at a dental clinic software company, and started my career in HR tech.",
+      "Most recently I was at Nubank on the business accounts team, working on microservices in Clojure with Datomic and Kafka, plus mobile and web. Before that I led technical planning and product decisions at a dental clinic software company, and started my career in HR tech.",
       "I studied Computer Engineering at Escola Politécnica da USP and completed a graduate course in Tech Leadership and Management.",
     ],
     skills: [
@@ -62,7 +62,16 @@ export const profile: Record<Locale, Profile> = {
     ],
     experience: [
       {
-        period: "2025 – Present",
+        period: "Sep 2026 – Present",
+        company: "Independent",
+        role: "Software Engineer, own projects",
+        stack: ["Ruby on Rails", "React", "Flutter", "PostgreSQL"],
+        points: [
+          "Designing and building Lawful (multi-tenant SaaS for law firms) and Possum (point of sale app) end to end. See the case studies above.",
+        ],
+      },
+      {
+        period: "2025 – Sep 2026",
         company: "Nubank",
         role: "Software Engineer",
         stack: ["Clojure", "Flutter", "Datomic", "Kafka"],
@@ -113,13 +122,13 @@ export const profile: Record<Locale, Profile> = {
   pt: {
     title: "Engenheiro de Software Backend",
     tagline:
-      "Engenheiro com foco em backend e veia full-stack. Hoje construo a conta PJ do Nubank, com mais de 6 anos entregando sistemas em produção em Clojure e Ruby on Rails.",
+      "Engenheiro com foco em backend e veia full-stack. Mais de 6 anos entregando sistemas em produção em Clojure e Ruby on Rails, mais recentemente construindo a conta PJ do Nubank. Agora construindo o Lawful e o Possum, e aberto a novas oportunidades.",
     description:
       "Portfólio de Guilherme Ludescher, engenheiro de software backend (Clojure, Ruby on Rails, Kafka, PostgreSQL) em São Paulo.",
     location: "São Paulo e estou aberto a mudança",
     about: [
       "Sou engenheiro de software, gosto de trabalhar em equipe e de entender o negócio antes de escrever código. Meu foco é backend, mas passei a maior parte da carreira como full-stack, sendo dono de funcionalidades do banco de dados à interface.",
-      "Hoje estou no Nubank, no time de contas PJ, trabalhando com microsserviços em Clojure, Datomic e Kafka, além de mobile e web. Antes disso, liderei planejamentos técnicos e decisões de produto em uma empresa de software para clínicas odontológicas, e comecei a carreira em HR tech.",
+      "Até recentemente estive no Nubank, no time de contas PJ, trabalhando com microsserviços em Clojure, Datomic e Kafka, além de mobile e web. Antes disso, liderei planejamentos técnicos e decisões de produto em uma empresa de software para clínicas odontológicas, e comecei a carreira em HR tech.",
       "Me formei em Engenharia de Computação na Escola Politécnica da USP e fiz uma pós-graduação em Liderança e Gestão em Tecnologia.",
     ],
     skills: [
@@ -136,7 +145,16 @@ export const profile: Record<Locale, Profile> = {
     ],
     experience: [
       {
-        period: "2025 – Atual",
+        period: "Set 2026 – Atual",
+        company: "Independente",
+        role: "Engenheiro de Software, projetos próprios",
+        stack: ["Ruby on Rails", "React", "Flutter", "PostgreSQL"],
+        points: [
+          "Projetando e construindo o Lawful (SaaS multi-tenant para escritórios de advocacia) e o Possum (app de ponto de venda) de ponta a ponta. Veja os estudos de caso acima.",
+        ],
+      },
+      {
+        period: "2025 – Set 2026",
         company: "Nubank",
         role: "Engenheiro de Software",
         stack: ["Clojure", "Flutter", "Datomic", "Kafka"],

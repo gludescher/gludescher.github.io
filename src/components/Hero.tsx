@@ -5,12 +5,13 @@ interface Props {
   title: string;
   tagline: string;
   photo: string | null;
-  labels: { greeting: string; viewProjects: string; getInTouch: string; portraitAlt: string };
+  cvHref: string;
+  labels: { greeting: string; viewProjects: string; getInTouch: string; portraitAlt: string; downloadCv: string };
 }
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-export default function Hero({ name, title, tagline, photo, labels }: Props) {
+export default function Hero({ name, title, tagline, photo, cvHref, labels }: Props) {
   const reduce = useReducedMotion();
   const item = (i: number) => ({
     initial: reduce ? false : { opacity: 0, y: 24 },
@@ -65,6 +66,13 @@ export default function Hero({ name, title, tagline, photo, labels }: Props) {
               className="rounded-full border border-border px-6 py-3 text-sm font-medium transition hover:border-accent hover:text-accent"
             >
               {labels.getInTouch}
+            </a>
+            <a
+              href={cvHref}
+              download
+              className="rounded-full border border-border px-6 py-3 text-sm font-medium transition hover:border-accent hover:text-accent"
+            >
+              {labels.downloadCv}
             </a>
           </motion.div>
         </div>

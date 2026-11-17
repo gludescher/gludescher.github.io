@@ -27,11 +27,13 @@ const slug = (id: string) => id.split("/").slice(1).join("/");
       title={p.title}
       tagline={p.tagline}
       photo={site.photo}
+      cvHref={site.cv[locale]}
       labels={{
         greeting: t("hero.greeting"),
         viewProjects: t("hero.viewProjects"),
         getInTouch: t("hero.getInTouch"),
         portraitAlt: t("hero.portraitAlt"),
+        downloadCv: t("hero.downloadCv"),
       }}
     />
 
