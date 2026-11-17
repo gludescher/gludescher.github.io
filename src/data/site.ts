@@ -39,7 +39,7 @@ export const profile: Record<Locale, Profile> = {
   en: {
     title: "Backend Software Engineer",
     tagline:
-      "Backend-focused engineer with a full-stack streak. 6+ years shipping production systems in Clojure and Ruby on Rails, most recently building business banking at Nubank. Now building Lawful and Possum, and open to new opportunities.",
+      "Backend-focused engineer with a full-stack streak. 6+ years shipping production systems in Clojure and Ruby on Rails, most recently building business banking at Nubank. Now building Lawful and Possum, two personal projects with real commercial use, and open to new opportunities.",
     description:
       "Portfolio of Guilherme Ludescher, backend software engineer (Clojure, Ruby on Rails, Kafka, PostgreSQL) based in São Paulo, Brazil.",
     location: "São Paulo, Brazil, and open to relocation",

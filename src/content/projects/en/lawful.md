@@ -21,16 +21,16 @@ images:
 
 Law firms juggle their staff, their clients and a long list of ongoing legal cases, often across spreadsheets and chat. Lawful is a web app that puts that in one place, where every firm sees **only its own data** and decides what each person on its team may do.
 
-## What I built
+## What I've built
 
-A full-stack product in two repositories with history preserved: **`lawful-api`**, a Rails 8 API-only app on PostgreSQL (Devise, Pundit, `discard`, Pagy, CPF/CNPJ validation), and **`lawful-web`**, a React + TypeScript + Vite frontend with Mantine, TanStack Query and React Router. The sample data in the screenshots is fictional.
+A full-stack product in two repositories: **`lawful-api`**, a Rails 8 API-only app on PostgreSQL (Devise, Pundit, `discard`, Pagy, CPF/CNPJ validation), and **`lawful-web`**, a React + TypeScript + Vite frontend with Mantine, TanStack Query and React Router. The sample data in the screenshots is fictional.
 
-- **Clients, individuals and companies.** Both kinds share one `clients` table, with CPF and CNPJ validation (including the new alphanumeric CNPJ) and details such as address, CEP and marital status.
-- **Legal cases, as a table or a board.** Cases carry classification, dates and amounts. The board has one column per status, and dragging a card changes its status.
-- **Tasks tied to cases.** A task has a due date, a type, a fatal date, assigned users and optionally a legal case. It uses the same status as a case, shows when it is overdue and has its own board.
-- **Team and assignments.** Users are registered with a temporary password they must replace at first access, can be assigned to cases and tasks, and can upload a profile photo (cropped in the browser).
+- **Clients, individuals and companies.** Both kinds share one `clients` table, with CPF and CNPJ validation (including the new alphanumeric CNPJ) and details such as address, ZIP code and marital status.
+- **Legal cases, as a table or a board.** Cases carry classification, dates and amounts. A list view and a drag-and-drop board view allow users to optimize their work when managing cases.
+- **Tasks tied to cases.** A task has a due date, a type, a fatal date, assigned users and optionally a legal case. Tasks have the same list and board views as cases, and overdue ones are flagged so it's clear what needs action first.
+- **Team and assignments.** Users can be assigned to cases and tasks and can be included in teams.
 - **Profiles and permissions.** Each firm defines its own profiles, with see, create, edit and delete per resource. The API enforces them and the interface adapts to what the signed-in user can do.
-- **Isolation between firms,** covered by dedicated tests for every resource.
+- **Isolation between firms,** covered by dedicated tests for every resource, since data confidentiality is non-negotiable for law firms.
 
 ## Interesting engineering decisions
 

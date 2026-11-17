@@ -10,7 +10,10 @@ const alt = alternatePath(Astro.url);
 
 <header class="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-bg/70 backdrop-blur-md">
   <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <a href={home} class="font-display font-semibold tracking-tight">{site.name}</a>
+    <a href={home} class="flex items-center gap-2.5 font-display font-semibold tracking-tight">
+      <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
+      {site.name}
+    </a>
     <div class="flex items-center gap-6 text-sm text-muted">
       <a class="hidden transition hover:text-fg sm:inline" href={`${home}#projects`}>{t("nav.projects")}</a>
       <a class="hidden transition hover:text-fg sm:inline" href={`${home}#experience`}>{t("nav.experience")}</a>
