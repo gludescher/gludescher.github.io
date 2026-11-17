@@ -32,7 +32,7 @@ const { title, summary, kind, stack, repos, live, images } = project.data;
       {stack.map((s) => <li class="rounded-full border border-border px-3 py-1 font-mono text-xs text-muted">{s}</li>)}
     </ul>
     <div class="mt-6 flex flex-wrap gap-5 text-sm">
-      {repos.map((r) => <a class="text-accent-2 hover:underline" href={r.url}>{r.label} ↗</a>)}
+      {repos.map((r) => <a class="text-accent-2 hover:underline" href={r.url} target="_blank" rel="noopener noreferrer">{r.label} ↗</a>)}
       {repos.length === 0 && (
         <p class="text-muted">
           {t("projects.privateCode")}{" "}
@@ -41,7 +41,7 @@ const { title, summary, kind, stack, repos, live, images } = project.data;
           </a>
         </p>
       )}
-      {live && <a class="text-accent-2 hover:underline" href={live}>{t("projects.live")} ↗</a>}
+      {live && <a class="text-accent-2 hover:underline" href={live} target="_blank" rel="noopener noreferrer">{t("projects.live")} ↗</a>}
     </div>
 
     <article class="prose-case mt-12">

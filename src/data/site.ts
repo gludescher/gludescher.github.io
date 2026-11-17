@@ -76,6 +76,7 @@ export const profile: Record<Locale, Profile> = {
         role: "Software Engineer",
         stack: ["Clojure", "Flutter", "Datomic", "Kafka"],
         points: [
+          "Built locked deposits for business accounts: product that reached thousands of customers and raised over R$100 million in funding.",
           "Business accounts team at an international digital bank, on a microservice infrastructure.",
           "Backend, mobile and web development with an AI-first approach to building product.",
           "Full ownership of the software lifecycle: development, testing and observability.",
@@ -87,7 +88,8 @@ export const profile: Record<Locale, Profile> = {
         role: "Full/Senior Software Engineer",
         stack: ["Ruby on Rails", "Vue.js", "Docker", "PostgreSQL"],
         points: [
-          "Dental clinic management software; large growth in client base while improving UX and tackling technical challenges.",
+          "Led the migration of the subscription provider from Stripe to Pagar.me, cutting subscription costs by 30% and growing the target market by about 20% by accepting new card brands and PIX.",
+          "Dental clinic management software; 400% increase in client base while improving UX and tackling technical challenges.",
           "Led technical planning and product decisions, and worked with external backend and frontend APIs.",
           "Led a forum for codebase standard-setting and global improvements.",
         ],
@@ -114,7 +116,7 @@ export const profile: Record<Locale, Profile> = {
         company: "Control iD",
         role: "Intern",
         stack: ["C#", ".NET", "Angular", "MySQL", "SQL Server"],
-        points: ["Security and access control software, with direct client contact and technical support."],
+        points: ["Security and access control software: project leadership, direct client contact and technical support, plus backlog and product management."],
       },
     ],
   },
@@ -159,6 +161,7 @@ export const profile: Record<Locale, Profile> = {
         role: "Engenheiro de Software",
         stack: ["Clojure", "Flutter", "Datomic", "Kafka"],
         points: [
+          "Construí as caixinhas de longo prazo para contas PJ: produto que alcançou milhares de clientes e captou mais de R$ 100 milhões em funding.",
           "Time de contas PJ de um banco digital internacional, em uma infraestrutura de microsserviços.",
           "Desenvolvimento backend, mobile e web, com uma abordagem AI-first para construir produto.",
           "Responsabilidade total pelo ciclo de vida do software: desenvolvimento, testes e observabilidade.",
@@ -170,7 +173,8 @@ export const profile: Record<Locale, Profile> = {
         role: "Engenheiro de Software Pleno/Sênior",
         stack: ["Ruby on Rails", "Vue.js", "Docker", "PostgreSQL"],
         points: [
-          "Software de gestão para clínicas odontológicas; grande crescimento da base de clientes, com melhorias de UX e desafios técnicos.",
+          "Liderei a migração do provedor de assinaturas do Stripe para o Pagar.me, reduzindo os custos de assinatura em 30% e ampliando o mercado-alvo em cerca de 20% ao aceitar novas bandeiras de cartão e PIX.",
+          "Software de gestão para clínicas odontológicas; aumento de 400% da base de clientes, com melhorias de UX e desafios técnicos.",
           "Liderei planejamentos técnicos e decisões de produto, e trabalhei com APIs externas de backend e frontend.",
           "Liderei um fórum para definir padrões de código e melhorias globais na base.",
         ],
@@ -197,7 +201,7 @@ export const profile: Record<Locale, Profile> = {
         company: "Control iD",
         role: "Estagiário",
         stack: ["C#", ".NET", "Angular", "MySQL", "SQL Server"],
-        points: ["Software de segurança e controle de acesso, com contato direto com clientes e suporte técnico."],
+        points: ["Software de segurança e controle de acesso: liderança de projetos, contato direto com clientes e suporte técnico, além de gestão de backlog e de produto."],
       },
     ],
   },

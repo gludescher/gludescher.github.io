@@ -69,7 +69,8 @@ export default function Hero({ name, title, tagline, photo, cvHref, labels }: Pr
             </a>
             <a
               href={cvHref}
-              download
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full border border-border px-6 py-3 text-sm font-medium transition hover:border-accent hover:text-accent"
             >
               {labels.downloadCv}

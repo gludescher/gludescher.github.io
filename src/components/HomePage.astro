@@ -133,8 +133,8 @@ const slug = (id: string) => id.split("/").slice(1).join("/");
           {t("contact.cta")}
         </a>
         <div class="mt-8 flex gap-6 text-sm">
-          <a class="text-accent-2 hover:underline" href={site.links.github}>GitHub ↗</a>
-          <a class="text-accent-2 hover:underline" href={site.links.linkedin}>LinkedIn ↗</a>
+          <a class="text-accent-2 hover:underline" href={site.links.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a class="text-accent-2 hover:underline" href={site.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
         </div>
       </Reveal>
     </section>
