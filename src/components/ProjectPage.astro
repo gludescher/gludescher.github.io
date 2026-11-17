@@ -15,7 +15,7 @@ const { project } = Astro.props;
 const locale = getLocale(Astro.url);
 const t = useTranslations(locale);
 const { Content } = await render(project);
-const { title, summary, kind, stack, repos, live, images } = project.data;
+const { title, summary, kind, stack, repos, live, images, imagesNote } = project.data;
 ---
 
 <Layout title={`${title} · ${site.name}`} description={summary}>
@@ -48,7 +48,7 @@ const { title, summary, kind, stack, repos, live, images } = project.data;
       {/* Screenshots go right after the first section ("The problem"). */}
       <AfterFirstSection>
         <Content />
-        {images.length > 0 && <Gallery slot="insert" images={images} />}
+        {images.length > 0 && <Gallery slot="insert" images={images} note={imagesNote} />}
       </AfterFirstSection>
     </article>
   </main>

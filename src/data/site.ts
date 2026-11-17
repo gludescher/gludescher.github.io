@@ -124,7 +124,7 @@ export const profile: Record<Locale, Profile> = {
   pt: {
     title: "Engenheiro de Software Backend",
     tagline:
-      "Engenheiro com foco em backend e veia full-stack. Mais de 6 anos entregando sistemas em produção em Clojure e Ruby on Rails, mais recentemente construindo a conta PJ do Nubank. Agora construindo o Lawful e o Possum, e aberto a novas oportunidades.",
+      "Engenheiro com foco em backend e veia full-stack. Mais de 6 anos entregando sistemas em produção em Clojure e Ruby on Rails, mais recentemente na conta PJ do Nubank. Agora construo o Lawful e o Possum, dois projetos pessoais com uso comercial real, e estou aberto a novas oportunidades.",
     description:
       "Portfólio de Guilherme Ludescher, engenheiro de software backend (Clojure, Ruby on Rails, Kafka, PostgreSQL) em São Paulo.",
     location: "São Paulo e estou aberto a mudança",

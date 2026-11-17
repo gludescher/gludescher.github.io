@@ -14,6 +14,8 @@ const projects = defineCollection({
     live: z.url().optional(),
     // Paths relative to /public, e.g. "/projects/possum/checkout.png"
     images: z.array(z.object({ src: z.string(), alt: z.string() })).default([]),
+    // Optional small note shown right below the screenshots.
+    imagesNote: z.string().optional(),
   }),
 });
 

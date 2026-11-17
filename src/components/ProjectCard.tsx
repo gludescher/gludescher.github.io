@@ -22,8 +22,6 @@ export default function ProjectCard({ title, kind, summary, stack, href, index, 
   return (
     <motion.a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
       onMouseMove={onMove}
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
