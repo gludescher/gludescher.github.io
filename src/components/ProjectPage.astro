@@ -36,7 +36,7 @@ const { title, summary, kind, stack, repos, live, images } = project.data;
       {repos.length === 0 && (
         <p class="text-muted">
           {t("projects.privateCode")}{" "}
-          <a class="text-accent-2 hover:underline" href={site.links.email}>
+          <a class="text-accent-2 hover:underline" href={site.links.email} target="_blank" rel="noopener noreferrer">
             {t("projects.requestCode")}
           </a>
         </p>
