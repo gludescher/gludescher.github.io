@@ -25,17 +25,17 @@ export default function Hero({ name, title, tagline, photo, cvHref, labels }: Pr
     .slice(0, 2);
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden px-6 pt-20">
+    <section className="relative flex min-h-screen items-center overflow-x-clip px-6 pt-20">
       {/* Animated gradient orbs */}
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -top-40 -left-32 h-[32rem] w-[32rem] rounded-full bg-accent/30 blur-[120px]"
+        className="pointer-events-none absolute -top-40 -left-32 -z-10 h-[32rem] w-[32rem] rounded-full bg-accent/20 blur-[120px]"
         animate={reduce ? undefined : { x: [0, 60, 0], y: [0, 40, 0] }}
         transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         aria-hidden
-        className="pointer-events-none absolute -right-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-accent-2/20 blur-[120px]"
+        className="pointer-events-none absolute -right-32 -bottom-24 -z-10 h-[28rem] w-[28rem] rounded-full bg-accent-2/15 blur-[120px]"
         animate={reduce ? undefined : { x: [0, -50, 0], y: [0, -40, 0] }}
         transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -49,7 +49,7 @@ export default function Hero({ name, title, tagline, photo, cvHref, labels }: Pr
             {...item(1)}
             className="font-display text-5xl leading-[1.05] font-bold tracking-tight sm:text-6xl lg:text-7xl"
           >
-            {labels.greeting} <span className="text-gradient">{name.split(" ")[0]}</span>.
+            {labels.greeting} <span className="text-accent">{name.split(" ")[0]}</span>.
           </motion.h1>
           <motion.p {...item(2)} className="mt-6 max-w-xl text-lg text-muted sm:text-xl">
             {tagline}

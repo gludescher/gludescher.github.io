@@ -10,15 +10,15 @@ const alt = alternatePath(Astro.url);
 
 <header class="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-bg/70 backdrop-blur-md">
   <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <a href={home} class="flex items-center gap-2.5 font-display font-semibold tracking-tight">
+    <a id="home-link" href={home} class="flex items-center gap-2.5 font-display font-semibold tracking-tight">
       <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
       {site.name}
     </a>
     <div class="flex items-center gap-6 text-sm text-muted">
-      <a class="hidden transition hover:text-fg sm:inline" href={`${home}#projects`}>{t("nav.projects")}</a>
-      <a class="hidden transition hover:text-fg sm:inline" href={`${home}#experience`}>{t("nav.experience")}</a>
-      <a class="hidden transition hover:text-fg sm:inline" href={`${home}#about`}>{t("nav.about")}</a>
-      <a class="transition hover:text-fg" href={`${home}#contact`}>{t("nav.contact")}</a>
+      <a class="hidden transition hover:text-fg sm:inline" data-section="projects" href={`${home}#projects`}>{t("nav.projects")}</a>
+      <a class="hidden transition hover:text-fg sm:inline" data-section="experience" href={`${home}#experience`}>{t("nav.experience")}</a>
+      <a class="hidden transition hover:text-fg sm:inline" data-section="about" href={`${home}#about`}>{t("nav.about")}</a>
+      <a class="transition hover:text-fg" data-section="contact" href={`${home}#contact`}>{t("nav.contact")}</a>
       <div class="flex items-center gap-2">
         <a
           id="lang-switch"
@@ -26,7 +26,7 @@ const alt = alternatePath(Astro.url);
           hreflang={alt.locale === "pt" ? "pt-BR" : "en"}
           aria-label={t("nav.language")}
           title={t("nav.language")}
-          class="rounded-full border border-border px-2.5 py-1 font-mono text-xs transition hover:border-accent hover:text-fg"
+          class="inline-flex h-8 w-11 items-center justify-center rounded-full border border-border font-mono text-xs leading-none pt-[3px] transition hover:border-accent hover:text-fg"
         >
           {alt.locale.toUpperCase()}
         </a>
@@ -35,9 +35,12 @@ const alt = alternatePath(Astro.url);
           type="button"
           aria-label={t("nav.theme")}
           title={t("nav.theme")}
-          class="rounded-full border border-border px-2.5 py-1 transition hover:border-accent hover:text-fg"
+          class="inline-flex h-8 w-11 items-center justify-center rounded-full border border-border text-sm leading-none transition hover:border-accent hover:text-fg"
         >
-          ◐
+          <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none" />
+          </svg>
         </button>
       </div>
     </div>
@@ -45,6 +48,41 @@ const alt = alternatePath(Astro.url);
 </header>
 
 <script>
+  // On the home page, the logo scrolls back to the hero instead of reloading.
+  document.getElementById("home-link")?.addEventListener("click", (e) => {
+    const a = e.currentTarget as HTMLAnchorElement;
+    if (new URL(a.href).pathname !== location.pathname) return;
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    history.replaceState(null, "", location.pathname + location.search);
+  });
+
+  // Highlight the nav link of the section currently on screen (home page only).
+  const navLinks = new Map(
+    [...document.querySelectorAll<HTMLAnchorElement>("a[data-section]")].map((a) => [a.dataset.section!, a]),
+  );
+  const sections = [...navLinks.keys()]
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null);
+  if (sections.length > 0) {
+    const update = () => {
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      let current: string | null = atBottom ? sections[sections.length - 1].id : null;
+      if (!atBottom) {
+        const line = window.innerHeight * 0.4;
+        for (const s of sections) if (s.getBoundingClientRect().top <= line) current = s.id;
+      }
+      navLinks.forEach((a, id) => {
+        const on = id === current;
+        a.classList.toggle("text-accent", on);
+        on ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current");
+      });
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    update();
+  }
+
   document.getElementById("theme-toggle")?.addEventListener("click", () => {
     const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
     document.documentElement.dataset.theme = next;

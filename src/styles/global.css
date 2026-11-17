@@ -1,11 +1,11 @@
 @import "tailwindcss";
 @import "@fontsource-variable/inter";
-@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/sora";
 
 /* Dark-first design tokens. Light theme overrides under [data-theme="light"]. */
 @theme {
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Space Grotesk Variable", "Inter Variable", sans-serif;
+  --font-display: "Sora Variable", "Inter Variable", sans-serif;
 
   --color-bg: var(--bg);
   --color-surface: var(--surface);
@@ -17,30 +17,32 @@
 }
 
 :root {
-  --bg: #07070b;
-  --surface: #0f0f16;
-  --border: #1e1e2b;
-  --fg: #f4f4f8;
-  --muted: #8b8ba0;
-  --accent: #5276d8;
-  --accent-2: #22d3ee;
+  /* Colors from the Mirage (High-contrast) VS Code theme. */
+  --bg: #1b2738;
+  --surface: #223043;
+  --border: #42557b;
+  --fg: #ffffff;
+  --muted: #a6b2c0;
+  --accent: #ff7733;
+  --accent-2: #4cebff;
   color-scheme: dark;
 }
 
 :root[data-theme="light"] {
-  --bg: #e9ecf2;
-  --surface: #f4f6f9;
-  --border: #d3d8e2;
-  --fg: #0e1424;
-  --muted: #535c72;
-  --accent: #1e3a8a;
-  --accent-2: #0e7490;
+  --bg: #f3f6fb;
+  --surface: #ffffff;
+  --border: #9fb0c9;
+  --fg: #0d1c2b;
+  --muted: #3d5170;
+  --accent: #cc4a0a;
+  --accent-2: #0b7a99;
   color-scheme: light;
 }
 
 html {
   scroll-behavior: smooth;
 }
+
 
 body {
   background: var(--bg);
@@ -51,13 +53,6 @@ body {
 
 ::selection {
   background: color-mix(in srgb, var(--accent) 40%, transparent);
-}
-
-.text-gradient {
-  background: linear-gradient(120deg, var(--accent), var(--accent-2));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
 /* Cursor-following spotlight on cards (see ProjectCard.tsx) */

@@ -127,7 +127,7 @@ export const profile: Record<Locale, Profile> = {
       "Engenheiro com foco em backend e veia full-stack. Mais de 6 anos entregando sistemas em produção em Clojure e Ruby on Rails, mais recentemente na conta PJ do Nubank. Agora construo o Lawful e o Possum, dois projetos pessoais com uso comercial real, e estou aberto a novas oportunidades.",
     description:
       "Portfólio de Guilherme Ludescher, engenheiro de software backend (Clojure, Ruby on Rails, Kafka, PostgreSQL) em São Paulo.",
-    location: "São Paulo e estou aberto a mudança",
+    location: "São Paulo, disposto a relocação pela oportunidade certa",
     about: [
       "Sou engenheiro de software, gosto de trabalhar em equipe e de entender o negócio antes de escrever código. Meu foco é backend, mas passei a maior parte da carreira como full-stack, sendo dono de funcionalidades do banco de dados à interface.",
       "Até recentemente estive no Nubank, no time de contas PJ, trabalhando com microsserviços em Clojure, Datomic e Kafka, além de mobile e web. Antes disso, liderei planejamentos técnicos e decisões de produto em uma empresa de software para clínicas odontológicas, e comecei a carreira em HR tech.",
